@@ -26,13 +26,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
 
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemWorkBinding binding = ItemWorkBinding.
-                inflate(LayoutInflater.from(parent.getContext()), parent,
-                        false);
+        ItemWorkBinding binding = ItemWorkBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
