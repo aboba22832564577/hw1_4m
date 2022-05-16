@@ -38,9 +38,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.onBind(models.get(position).getTitle(), models.get(position).getCreated());
         holder.binding.itemBackground.setVerticalScrollbarPosition(position);
         if (position % 2 == 1) {
-            holder.itemView.setBackgroundColor(Color.GREEN);
+            holder.itemView.setBackgroundColor(Color.GRAY);
         } else {
-            holder.itemView.setBackgroundColor(Color.RED);
+            holder.itemView.setBackgroundColor(Color.WHITE);
         }
     }
 

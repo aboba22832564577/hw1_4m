@@ -1,5 +1,6 @@
 package com.geektech.hw1_4m.ui.profile;
 
+
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
@@ -8,20 +9,20 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.geektech.hw1_4m.R;
+import com.bumptech.glide.Glide;
 import com.geektech.hw1_4m.databinding.FragmentProfileBinding;
+import com.geektech.hw1_4m.utils.Prefs;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -29,58 +30,87 @@ import java.io.InputStream;
 
 public class ProfileFragment extends Fragment {
 
-
     private FragmentProfileBinding binding;
-    private ActivityResultLauncher activityResultLauncher;
+    private Uri uri;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ProfileViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        return root;
+        return binding.getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initListener();
         getImages();
+        initBtn();
+        initText();
+        initImageListener();
     }
 
 
     private void initListener() {
-        binding.imgPicture.setOnClickListener(v -> {
-            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/*");
-            activityResultLauncher.launch(photoPickerIntent);
+        binding.addImage.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            activityResultLauncher.launch(intent);
+
         });
+
     }
 
-
     public void getImages() {
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        activityResultLauncher = registerForActivityResult(new
+                ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 try {
+                    assert result.getData() != null;
                     final Uri imageUri = result.getData().getData();
-                    final InputStream imageStream = requireActivity().getContentResolver().openInputStream(imageUri);
+                    Prefs.prefs.saveImage(imageUri);
+                    final InputStream imageStream = requireActivity().
+                            getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    binding.imgPicture.setImageBitmap(selectedImage);
+                    binding.addImage.setImageBitmap(selectedImage);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    Toast.makeText(requireActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
                 }
-
-            }else {
-                Toast.makeText(requireActivity(), "You haven't picked Image", Toast.LENGTH_LONG).show();
             }
         });
     }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+
+    private void initImageListener() {
+        if (!Prefs.getPrefs().getImage().equals("")) {
+            Uri uri = Uri.parse(Prefs.getPrefs().getImage());
+            Glide.with(binding.addImage).load(uri).into(binding.addImage);
+        }
+    }
+
+    private void initText() {
+        binding.txtName.setText(Prefs.getPrefs().firstName());
+        binding.txtLastName.setText(Prefs.getPrefs().lastName());
+    }
+
+    private void initBtn() {
+        binding.btnTxtSave.setOnClickListener(v -> {
+            saveData();
+            initText();
+            initImageListener();
+        });
+    }
+
+    private void saveData() {
+        String firstName = binding.edtName.getText().toString();
+        String lastName = binding.edtLastName.getText().toString();
+        if (!firstName.trim().isEmpty()) {
+
+            Prefs.getPrefs().saveFirstName(firstName);
+        }
+        if (!lastName.equals("")) {
+            Prefs.getPrefs().saveLastName(lastName);
+        }
+        if (uri != null) {
+            Prefs.getPrefs().saveImage(uri);
+        }
     }
 }

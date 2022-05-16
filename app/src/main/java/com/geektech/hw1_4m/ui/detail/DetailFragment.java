@@ -35,12 +35,9 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initSave();
-        actionBar();
     }
 
-    private void actionBar() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-    }
+
 
 
     private void initSave() {

@@ -23,16 +23,26 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
-        openBoard();
+        board();
         BottomNav();
+        openBoard();
+    }
+
+    private void board() {
+       if (!App.prefs.isShown()){
+          openBoard();
+          App.prefs.isShowed();
+      }
     }
 
     private void BottomNav() {
         controller.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
             if (navDestination.getId() == R.id.boardFragment || navDestination.getId() == R.id.detailFragment) {
                 binding.navView.setVisibility(View.GONE);
+                getSupportActionBar().hide();
             } else {
                 binding.navView.setVisibility(View.VISIBLE);
+                getSupportActionBar().show();
             }
         });
     }
