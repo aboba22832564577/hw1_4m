@@ -1,5 +1,6 @@
 package com.geektech.hw1_4m.ui.home.Adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.geektech.hw1_4m.App;
 import com.geektech.hw1_4m.databinding.ItemWorkBinding;
 import com.geektech.hw1_4m.ui.home.Model.TaskModel;
 
@@ -16,15 +18,29 @@ import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
-    private final List<TaskModel> models = new ArrayList<>();
+    private List<TaskModel> models = new ArrayList<>();
+    private IHomeClickListener iHomeClickListener;
+    private LongClick longClick;
 
 
-    public void addNewNote(TaskModel model) {
-        this.models.add(model);
+    @SuppressLint("NotifyDataSetChanged")
+    public void addItem(List<TaskModel> list){
+        this.models.clear();
+        this.models.addAll(list);
         notifyDataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void setLongClick (LongClick longClick) {
+        this.longClick = longClick;
+        notifyDataSetChanged();
+    }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void setIHomeClickListener (IHomeClickListener iHomeClickListener) {
+        this.iHomeClickListener = iHomeClickListener;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -42,6 +58,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         } else {
             holder.itemView.setBackgroundColor(Color.WHITE);
         }
+
+
+        holder.itemView.setOnLongClickListener(v -> {
+            longClick.OmLongClick(models.get(position), position);
+            return true;
+        });
+
+
+
+        holder.itemView.setOnClickListener(v -> iHomeClickListener.OnHomeClick(models.get(position),
+                position));
     }
 
     @Override
@@ -49,10 +76,21 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         return models.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void sortByAlphabet() {
+        models = App.dataBase.caseDao().getAllTasksByAlphabet();
+        notifyDataSetChanged();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setByDate() {
+        models = App.dataBase.caseDao().getAllTasksByDate();
+        notifyDataSetChanged();
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ItemWorkBinding binding;
-
         public ViewHolder(@NonNull ItemWorkBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -63,4 +101,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             binding.txtCreated.setText(created);
         }
     }
+
+    public interface IHomeClickListener{
+        void OnHomeClick(TaskModel model, int position);
+    }
+
+    public interface  LongClick{
+        void OmLongClick(TaskModel model, int position);
+    }
+
 }

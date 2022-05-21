@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.geektech.hw1_4m.R;
 import com.geektech.hw1_4m.databinding.FragmentBoardBinding;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class BoardFragment extends Fragment {
@@ -61,12 +59,8 @@ public class BoardFragment extends Fragment {
         binding.txtSkip.animate().translationX(0).setDuration(2000).start();
     }
     private void initClick() {
-        binding.txtFinish.setOnClickListener(v -> {
-            controller.navigate(R.id.navigation_home);
-        });
-        binding.txtSkip.setOnClickListener(v -> {
-            binding.vpBoard.setCurrentItem(3);
-        });
+        binding.txtFinish.setOnClickListener(v -> controller.navigate(R.id.navigation_home));
+        binding.txtSkip.setOnClickListener(v -> binding.vpBoard.setCurrentItem(3));
     }
     private void initListener() {
         binding.vpBoard.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

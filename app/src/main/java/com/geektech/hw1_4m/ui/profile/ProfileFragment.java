@@ -103,7 +103,6 @@ public class ProfileFragment extends Fragment {
         String firstName = binding.edtName.getText().toString();
         String lastName = binding.edtLastName.getText().toString();
         if (!firstName.trim().isEmpty()) {
-
             Prefs.getPrefs().saveFirstName(firstName);
         }
         if (!lastName.equals("")) {

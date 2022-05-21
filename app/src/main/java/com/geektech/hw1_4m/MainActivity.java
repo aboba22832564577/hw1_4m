@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private NavController controller;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         board();
         BottomNav();
-        openBoard();
     }
 
     private void board() {
@@ -35,9 +33,13 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
+
+
+
     private void BottomNav() {
         controller.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
-            if (navDestination.getId() == R.id.boardFragment || navDestination.getId() == R.id.detailFragment) {
+            if (navDestination.getId() == R.id.boardFragment || navDestination.getId() ==
+                    R.id.detailFragment) {
                 binding.navView.setVisibility(View.GONE);
                 getSupportActionBar().hide();
             } else {
