@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,6 +20,7 @@ import java.util.Locale;
 public class DetailFragment extends Fragment {
 
     private FragmentDetailBinding binding;
+    private int position;
     String date = new SimpleDateFormat("dd.MM.yyyy   HH:mm", Locale.getDefault()).
             format(new Date());
 
@@ -35,19 +35,43 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initSave();
+        checkIsEdit();
     }
 
 
-
-
     private void initSave() {
+        checkIsEdit();
         binding.btnSave.setOnClickListener(v -> {
-            String title = binding.saveText.getText().toString().trim();
+            String title = binding.saveText.getText().toString();
+
             Bundle bundle = new Bundle();
             bundle.putString("title", title);
             bundle.putString("date", date);
-            requireActivity().getSupportFragmentManager().setFragmentResult("Work", bundle);
+            bundle.putInt("position", position);
+            requireActivity().getSupportFragmentManager().setFragmentResult(
+                    "newTask", bundle);
             requireActivity().getSupportFragmentManager().popBackStack();
         });
+    }
+
+
+    private void checkIsEdit() {
+        if (getArguments() != null){
+            if (!requireArguments().getString("title").isEmpty()){
+                binding.saveText.setText(requireArguments().getString("title"));
+                position = requireArguments().getInt("position");
+                binding.btnSave.setOnClickListener(view -> {
+                    String title = binding.saveText.getText().toString();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", title);
+                    bundle.putString("date", date);
+                    bundle.putInt("position", position);
+                    requireActivity().getSupportFragmentManager().
+                            setFragmentResult("getTask", bundle);
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                });
+            }
+        }
     }
 }
