@@ -1,4 +1,4 @@
-package com.geektech.hw1_4m.ui.profile;
+package com.geektech.hw1_4m.models;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,4 +1,4 @@
-package com.geektech.hw1_4m.ui.home.Adapter;
+package com.geektech.hw1_4m.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;

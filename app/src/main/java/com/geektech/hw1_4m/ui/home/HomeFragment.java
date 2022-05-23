@@ -17,7 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.geektech.hw1_4m.App;
 import com.geektech.hw1_4m.R;
 import com.geektech.hw1_4m.databinding.FragmentHomeBinding;
-import com.geektech.hw1_4m.ui.home.Adapter.TaskAdapter;
+import com.geektech.hw1_4m.adapter.TaskAdapter;
 import com.geektech.hw1_4m.ui.home.Model.TaskModel;
 
 

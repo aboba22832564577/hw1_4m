@@ -16,13 +16,14 @@ import com.geektech.hw1_4m.databinding.FragmentDetailBinding;
 import java.util.Date;
 import java.util.Locale;
 
-
 public class DetailFragment extends Fragment {
+
 
     private FragmentDetailBinding binding;
     private int position;
     String date = new SimpleDateFormat("dd.MM.yyyy   HH:mm", Locale.getDefault()).
             format(new Date());
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -53,7 +54,6 @@ public class DetailFragment extends Fragment {
             requireActivity().getSupportFragmentManager().popBackStack();
         });
     }
-
 
     private void checkIsEdit() {
         if (getArguments() != null){

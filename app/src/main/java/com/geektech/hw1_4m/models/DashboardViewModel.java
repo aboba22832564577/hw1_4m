@@ -1,4 +1,4 @@
-package com.geektech.hw1_4m.ui.dashboard;
+package com.geektech.hw1_4m.models;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -18,8 +18,8 @@ public class App extends Application {
         prefs = new Prefs(getApplicationContext());
         dataBase = Room.databaseBuilder(getApplicationContext()
                 ,AppDataBase.class
-                ,"dataBase").
-                allowMainThreadQueries()
+                ,"dataBase")
+                .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
     }

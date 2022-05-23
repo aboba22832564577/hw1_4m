@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.geektech.hw1_4m.R;
+import com.geektech.hw1_4m.adapter.BoardAdapter;
 import com.geektech.hw1_4m.databinding.FragmentBoardBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
