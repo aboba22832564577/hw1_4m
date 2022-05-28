@@ -9,16 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.geektech.hw1_4m.R;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
 
 
     private final int[] img = {
-            R.drawable.img,
-            R.drawable.img_1,
-            R.drawable.img_4,
-            R.drawable.img_5
+            R.raw.welcome,
+            R.raw.use,
+            R.raw.lucky,
+            R.raw.giveup
     };
     private final String[] title = {
             "Добро пожаловать!",
@@ -56,7 +57,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title, description;
-        private final ImageView image;
+        private final LottieAnimationView image;
         public ViewHolder(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.vp_title);
@@ -67,7 +68,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         public void onBind(int img, String title, String desc) {
             this.title.setText(title);
             this.description.setText(desc);
-            this.image.setImageResource(img);
+            this.image.setAnimation(img);
         }
     }
 }

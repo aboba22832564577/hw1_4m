@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_marginHorizontal="20dp"
+<LinearLayout android:layout_marginHorizontal="20dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_add"
         android:id="@+id/vp_image"
+        app:lottie_autoPlay="true"
+        app:lottie_repeatMode="reverse"
+        app:lottie_loop="true"
         android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>

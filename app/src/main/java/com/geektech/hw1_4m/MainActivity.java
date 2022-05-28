@@ -11,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.geektech.hw1_4m.databinding.ActivityMainBinding;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private void board() {
        if (!App.prefs.isShown()){
           openBoard();
-          App.prefs.isShowed();
       }
     }
 

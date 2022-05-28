@@ -1,39 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:paddingHorizontal="10dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.AuthFragment">
+    tools:context=".ui.AuthFragment">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:hint="@string/email"
         android:id="@+id/ed_email"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:padding="10dp"
-        android:hint="email"
+        android:layout_marginTop="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:endIconMode="clear_text"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="160dp"
+            android:paddingStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/ed_password"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="10dp"
-        android:hint="password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:hint="@string/password"
+        android:id="@+id/ed_pass"
+        app:layout_constraintEnd_toEndOf="@id/ed_email"
+        app:layout_constraintStart_toStartOf="@id/ed_email"
+        app:layout_constraintTop_toBottomOf="@id/ed_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:endIconMode="password_toggle"
+        >
 
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            app:layout_constraintEnd_toEndOf="@id/ed_email"
+            app:layout_constraintStart_toStartOf="@id/ed_email"
+            app:layout_constraintTop_toBottomOf="@id/ed_email" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:background="@drawable/bg_btn"
         android:id="@+id/btn_enter"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:text="enter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:text="enter"
+        app:layout_constraintEnd_toEndOf="@id/ed_email"
+        app:layout_constraintStart_toStartOf="@id/ed_email"
+        app:layout_constraintTop_toBottomOf="@id/ed_pass" />
+
+
+    <ImageView
+        android:id="@+id/btn_google"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/img_6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_facebook"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_enter" />
+
+
+    <ImageView
+        android:id="@+id/btn_facebook"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/img_7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_google"
+        app:layout_constraintTop_toBottomOf="@id/btn_enter" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -128,7 +128,8 @@ public class HomeFragment extends Fragment {
                         String title = result.getString("title");
                         String date = result.getString("date");
                         int position = result.getInt("position");
-                        App.dataBase.caseDao().update(new TaskModel(position, title, "Сделано в: " + date));
+                        App.dataBase.caseDao().update(new TaskModel(position, title,
+                                "Сделано в: " + date));
                     }
                 });
     }
@@ -136,5 +137,10 @@ public class HomeFragment extends Fragment {
 
     private void toDetailFragment() {
         binding.btnButton.setOnClickListener(v -> controller.navigate(R.id.detailFragment));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
