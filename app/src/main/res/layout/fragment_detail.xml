@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_save"
-        android:background="@drawable/bg_btn"
         android:textColor="@color/white"
+        android:backgroundTint="@color/black"
         android:textStyle="bold"
         android:text="SAVE"
         android:layout_width="match_parent"

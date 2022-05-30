@@ -97,9 +97,10 @@
             android:layout_height="40dp"/>
 
         <Button
+            android:backgroundTint="@color/black"
             android:id="@+id/btn_txt_save"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="save"
             android:layout_marginTop="10dp"
             android:layout_below="@id/edt_last_name"

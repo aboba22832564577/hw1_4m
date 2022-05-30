@@ -13,7 +13,6 @@ public class App extends Application {
     public static Prefs prefs;
     public static AppDataBase dataBase;
 
-
     @Override
     public void onCreate() {
         super.onCreate();

@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
         init();
         board();
         BottomNav();
+        openAuth();
+    }
+
+    private void openAuth() {
+        controller.navigate(R.id.authFragment);
     }
 
     private void board() {
@@ -36,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     private void BottomNav() {
         controller.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
             if (navDestination.getId() == R.id.boardFragment || navDestination.getId() ==
-                    R.id.detailFragment) {
+                    R.id.detailFragment || navDestination.getId() == R.id.authFragment) {
                 binding.navView.setVisibility(View.GONE);
                 getSupportActionBar().hide();
             } else {
